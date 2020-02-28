@@ -1,0 +1,120 @@
+1. I used the command:
+   du -sh 
+   to find out the total size of current working directory: 509M
+   
+   I then used:
+    git count-objects -vH
+   to find out the size of git repository, which is 333.34MB
+   (I also used the command "du -sh .git/", which gives me 350M)
+
+   So the working files in the directory is 175.66MB.
+
+2. I used the following command to find local branches:
+   git branch | wc -l
+   Gives me 176.
+
+   For remote branches:
+   git branch -r | wc -l
+   gives me 177
+
+3. I used command :
+   git remote -v
+
+   There is only one repository "origin", it's located at: https://git.savannah.gnu.org/git/emacs.git
+
+4.I used the command:
+   git for-each-ref --sort=-committerdate refs/heads/ | head -10
+
+  And these are the branches I got:
+  19aecd340b7b3ab54629b790ba70a90130bad63d commit refs/heads/master
+d2873706749ef68803e79bab6109a534f4c9d23a commit refs/heads/scratch/joaot/make-completion-at-point-function
+dd3fa9411a28175f9a1a984a69cfa7162023c5df commit refs/heads/feature/windows-with-utils
+8f22251e595d7598d6643b0d24bf5f409dc59fa8 commit refs/heads/scratch/completion-api
+8a4de19dfb52551a65c360a9346ede137d0fc6e8 commit refs/heads/scratch/a-modest-completion-redesign-proposal
+2b0f589134d9427a96ab8cf0d8473715740984ef commit refs/heads/scratch/fido-mode
+924a4201d24c10c48db920815ebf98dfaadc1e85 commit refs/heads/feature/gnus-select2
+7a10082093791f0e035e4f9f95a774a7be1cd586 commit refs/heads/feature/extend_face_id
+079461b360a2467ff4ab2ec57516c6f9e45f50fe commit refs/heads/scratch/jit-lock-antiblink-cleaned-up
+55dcd32ad2209dc34bfb6b713bf73be9bf4c4cb2 commit refs/heads/emacs-26
+
+5.I used the command:
+  git rev-list --count master
+  which gives me 139583
+
+6. The total number of commits is found using:
+  git rev-list --count --all
+   It gives me 143910
+   So, the ratio would be 139583/143910 = 97%
+
+7.git shortlog -sn master  --since="01 Jan 2013" | head -10
+
+  It gives me:
+  3691  Eli Zaretskii
+  3644  Glenn Morris
+  3604  Paul Eggert
+  1806  Lars Ingebrigtsen
+  1784  Stefan Monnier
+  1571  Michael Albinus
+   619  Dmitry Gutov
+   576  Noam Postavsky
+   471  Alan Mackenzie
+   469  Juri Linkov
+
+
+   The first column is the number of commits, and the second column is the authors.
+
+8. For simplicity, I'll label the commits as follows:
+	4ea37c2b8b0c5a68fde59770c3536195e0972217 -- 1 
+	977cd6cb28a37744966ec62f70cf62659f6f302a -- 2
+	625cee531623feddbe3174fad52c7db96ec60bb3 -- 3
+	5490ccc5ebf39759dfd084bbd31f464701a3e775 -- 4
+	0c06b93c1e467debd401eb0b3be4652fde14fa95 -- 5
+	820739bbb572b30b6ce45756c9960e48dca859af -- 6
+	00e4e3e9d273a193620c3a4bb4914e555cb8e343 -- 7
+	49cd561dc62ea6b3fbedab7aef0f020733f4cf09 -- 8
+	abcb2e62dae6aa26308f7ac9efc89247f89cbe65 -- 9
+	98ac36efe4ce4bd3a0bca76fc73ce6c7abaa4371 -- 10
+
+	10
+	|
+       ...
+	|
+	9
+	|\
+       ...\
+	|  \
+       ...  \
+	|    \
+	|     8
+       ...    |
+	|     ...
+       ...    |
+	|     ...
+       ...    /  
+	|    7
+	|   /
+       ... 6
+	|  |
+       ..  ..
+	|  |
+	5 ...
+	|\ |
+       ...\|
+        |  |
+       ... ..   ...
+        |   \   /
+       ...    4
+	|     |
+       ...    ...
+	|     |
+	2     3
+	 \   /
+	  \ /
+	   1
+
+the parents of 1 are : 2 and 3
+4 is the ancestor of 3 and 1
+5, 9, 10 are the ancetors of 2 and 1
+8 is a child of 9
+7 is 6's parent
+10, 9, 8 is 7 and 6's ancestor
